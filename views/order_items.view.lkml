@@ -1,6 +1,70 @@
 view: order_items {
   sql_table_name: public.order_items ;;
   drill_fields: [id]
+  filter: current_date_range {
+    type: date
+    view_label: "-- Period over Period"
+    label: " FILTER: Date Range"
+    description: "Select the date range you are interested in using this filter, can be used by itself. Make sure any filter on Event Date covers this period, or is removed."
+
+    convert_tz: yes
+  }
+
+
+
+  parameter: compare_to {
+    view_label: "-- Period over Period"
+
+    description: "Choose the period you would like to compare to. Must be used with Current Date Range filter"
+    label: "PARAM: Compare To:"
+    type: unquoted
+    allowed_value: {
+      label: "Previous Period"
+      value: "Period"
+    }
+    allowed_value: {
+      label: "Previous Iso Year"
+      value: "IsoYear"
+    }
+    allowed_value: {
+      label: "Previous Calendar Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Previous Calendar Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Previous Calendar Year"
+      value: "Year"
+    }
+    allowed_value: {
+      label: "Custom"
+      value: "Custom"
+    }
+    default_value: "Period"
+  }
+
+  dimension_group: pop_no_tz {
+    hidden: yes
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date
+    ]
+    convert_tz: no
+  }
+
+  filter: compare_to_date_range {
+    type: date
+    view_label: "-- Period over Period"
+
+    label: "FILTER: Compare to Custom Range"
+    description: "Select the date range you are interested in using this filter, can be used by itself. Make sure any filter on Event Date covers this period, or is removed."
+
+    convert_tz: yes
+  }
 
   dimension: id {
     primary_key: yes
