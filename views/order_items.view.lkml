@@ -4,7 +4,7 @@ view: order_items {
   filter: current_date_range {
     type: date
     view_label: "-- Period over Period"
-    label: " FILTER: Date Range"
+    label: "1: Date Range"
     description: "Select the date range you are interested in using this filter, can be used by itself. Make sure any filter on Event Date covers this period, or is removed."
 
     convert_tz: yes
@@ -16,7 +16,7 @@ view: order_items {
     view_label: "-- Period over Period"
 
     description: "Choose the period you would like to compare to. Must be used with Current Date Range filter"
-    label: "PARAM: Compare To:"
+    label: "2: Compare To:"
     type: unquoted
     allowed_value: {
       label: "Previous Period"
@@ -45,22 +45,12 @@ view: order_items {
     default_value: "Period"
   }
 
-  dimension_group: pop_no_tz {
-    hidden: yes
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date
-    ]
-    convert_tz: no
-  }
 
   filter: compare_to_date_range {
     type: date
     view_label: "-- Period over Period"
 
-    label: "FILTER: Compare to Custom Range"
+    label: "3: Compare to Custom Range"
     description: "Select the date range you are interested in using this filter, can be used by itself. Make sure any filter on Event Date covers this period, or is removed."
 
     convert_tz: yes
